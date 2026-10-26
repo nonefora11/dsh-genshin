@@ -85,17 +85,17 @@
           "zero-dependency"
         ],
         "sortKeys": {
-          "publish": 1793023928
+          "publish": 1793024938
         }
       },
       "versions": [
         {
           "version": "0.1.0",
-          "publishTimestamp": 1793023928,
+          "publishTimestamp": 1793024938,
           "source": {
             "type": "git",
             "url": "https://github.com/headacheee/dsh-genshin-autolaunch",
-            "commit": "99f3e7c8923b00a506ac515efe7c40eb511d7f8c"
+            "commit": "0ad31abc7fee7316b16d9d81d7d870cbdd7e5a5b"
           },
           "engines": {
             "dsh": ">=0.1.0"
