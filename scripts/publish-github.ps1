@@ -105,7 +105,7 @@ if ($branches -notcontains "main") { git branch -M main }
 # 用临时 URL 推，避免 token 落进 .git/config。github.com 的 443 在国内常抽风，失败重试 3 次。
 $pushed = $false
 for ($attempt = 1; $attempt -le 3; $attempt++) {
-  git push --quiet $authUrl "HEAD:refs/heads/main" 2>&1 | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
+  git -c http.schannelCheckRevoke=false -c http.postBuffer=524288000 -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=300 push --quiet $authUrl "HEAD:refs/heads/main" 2>&1 | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
   if ($LASTEXITCODE -eq 0) { $pushed = $true; break }
   Write-Host "   push 第 $attempt 次失败，5 秒后重试（若一直失败：挂代理或开 Steam++ 的 GitHub 加速）" -ForegroundColor Yellow
   Start-Sleep -Seconds 5

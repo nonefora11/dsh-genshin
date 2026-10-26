@@ -24,6 +24,26 @@
 
 所以：**API 那条路现在就通，卡的是 `git push`**。开个代理，或者开着你可能已经装了的 Steam++ / Watt Toolkit 的「GitHub 加速」，再跑脚本即可；脚本对 push 失败会自动重试 3 次。
 
+### 开了 Steam++ 之后仍然 `git push` 失败？
+
+本机实测（Steam++ 已在跑，`hosts` 里 github.com 已被指向 `127.0.0.1`，`Steam++.Accelerator` 占着 80/443）：
+
+```
+curl https://github.com → schannel: next InitializeSecurityContext failed:
+                          CRYPT_E_NO_REVOCATION_CHECK (0x80092012)
+```
+
+这是吊销列表（CRL/OCSP）查不到导致的 TLS 校验失败，不是没连上。解掉：
+
+```bash
+git config --global http.schannelCheckRevoke false
+git ls-remote --heads https://github.com/awesome-dsh-plugin/awesome-dsh-plugin   # 验证：能列出分支就通了
+```
+
+`publish-github.ps1` 里已经给 push 加了 `-c http.schannelCheckRevoke=false -c http.postBuffer=524288000 -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=300`，走 Steam++ 时也稳。
+
+> 顺带一句：Steam++ 的加速会让 `raw.githubusercontent.com`、`github.io` 之类也走本地 MITM，这正好把「国内打不开」那个坑填了——索引地址可以放心用 `https://headacheee.github.io/...`。但 curl/git 之外的工具（比如浏览器扩展）如果报证书错误，是没信任 Steam++ 根证书，装一下它的证书即可。
+
 ## 第 1 步：拿一个 token（1 分钟）
 
 打开 <https://github.com/settings/tokens> → *Generate new token (classic)* → 勾 **`repo`** → 生成后复制。
