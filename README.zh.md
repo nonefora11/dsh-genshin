@@ -17,16 +17,20 @@ DeepSeek Harness 插件：**启动 DSH 之后，自动打开《原神》官网�
 
 ## 安装
 
+### 这台机器上已经装好了
+
+`desktop` profile 里已经装上了：tarball 装进 `C:\Users\wwb26\.dsh\profiles\desktop`，包名也写进了 `dsh.profile.bundles`。
+下次启动 DSH 就会自动开官网 + 下安装器。想立刻验证，直接跑 `node lib/cli.js`。
+
 ### 从 DSH 插件市场
 
-在 *设置 → 插件 → 发现* 里搜 **原神自动启动** / **Genshin Auto Launch**，或者把本仓库加为索引源。
+在 *设置 → 插件 → 发现* 里搜 **原神自动启动** / **Genshin Auto Launch**，或者把本仓库加为索引源（`market/index.json`）。
 
 ### 从 tarball / git
 
 ```bash
 # 在你的 DSH profile 目录里执行，例如 C:\Users\<你>\.dsh\profiles\desktop
-pnpm add dsh-genshin-autolaunch                     # 从 npm
-pnpm add file:./dsh-genshin-autolaunch-0.1.0.tgz     # 从本地打包
+pnpm add file:./dsh-genshin-autolaunch-0.1.0.tgz    # Release 里的资产
 pnpm add "git+https://github.com/headacheee/dsh-genshin-autolaunch.git#<commit>"
 ```
 
