@@ -17,13 +17,6 @@ The download runs once per version: if the same file is already complete and rec
 
 ## Install
 
-### Already installed here
-
-This machine's `desktop` profile already runs it: the tarball is installed into
-`C:\Users\wwb26\.dsh\profiles\desktop` and the package is listed in
-`dsh.profile.bundles`, so the next DSH start opens the site and downloads the
-launcher. Restart DSH, or run `node lib/cli.js` to trigger it immediately.
-
 ### From the DSH plugin marketplace
 
 Search for **Genshin Auto Launch** in *Settings → Plugins → Discover*, or add this repository as an index source (`market/index.json`).
