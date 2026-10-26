@@ -1,4 +1,4 @@
-# 把 dsh-genshin-autolaunch 推到你自己的 GitHub，并顺带发一个 Release
+﻿# 把 dsh-genshin-autolaunch 推到你自己的 GitHub，并顺带发一个 Release
 #
 # 用法（在仓库根目录执行）：
 #   $env:GITHUB_TOKEN = "ghp_xxx"      # 只需要 repo 权限的 classic PAT，或 fine-grained 的 Contents+Metadata 权限
@@ -10,10 +10,13 @@
 #     -Repo    仓库名（默认 dsh-genshin-autolaunch）
 #     -Private 建成私有仓库
 #     -SkipRelease  只推代码，不建 Release
+#     -EnablePages  顺手开 GitHub Pages（市场索引就有个国内能访问的 https 地址）
 #     不带 token 时会从 git credential 里再找一次
 #
-# 脚本做的事：校验 token → 建仓库（已存在就跳过）→ 推送 main → npm pack → 建 Release 并上传 tgz。
+# 脚本做的事：校验 token → 建仓库（已存在就跳过）→ 推送 main → npm pack → 建 Release 并上传 tgz →（可选）开 Pages。
 # token 不会写进 .git/config，推送用的是临时 URL。
+# 网络提醒：github.com 的 443 在国内经常抽风，脚本对 push 失败会自动重试 3 次；
+# 一直失败就挂上代理 / 开 Steam++ 的 GitHub 加速再跑。
 
 [CmdletBinding()]
 param(
@@ -21,7 +24,8 @@ param(
   [string]$Owner = "headacheee",
   [string]$Repo = "dsh-genshin-autolaunch",
   [switch]$Private,
-  [switch]$SkipRelease
+  [switch]$SkipRelease,
+  [switch]$EnablePages
 )
 
 $ErrorActionPreference = "Stop"
@@ -98,8 +102,15 @@ $cleanUrl = "https://github.com/$repoFull.git"
 $authUrl = "https://x-access-token:$Token@github.com/$repoFull.git"
 $branches = git branch --format="%(refname:short)"
 if ($branches -notcontains "main") { git branch -M main }
-# 用临时 URL 推，避免 token 落进 .git/config
-git push --quiet $authUrl "HEAD:refs/heads/main"
+# 用临时 URL 推，避免 token 落进 .git/config。github.com 的 443 在国内常抽风，失败重试 3 次。
+$pushed = $false
+for ($attempt = 1; $attempt -le 3; $attempt++) {
+  git push --quiet $authUrl "HEAD:refs/heads/main" 2>&1 | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
+  if ($LASTEXITCODE -eq 0) { $pushed = $true; break }
+  Write-Host "   push 第 $attempt 次失败，5 秒后重试（若一直失败：挂代理或开 Steam++ 的 GitHub 加速）" -ForegroundColor Yellow
+  Start-Sleep -Seconds 5
+}
+if (-not $pushed) { throw "三次 push 都失败：先解决 github.com 连通性，再重跑本脚本（API 侧都已就绪）" }
 git remote remove origin 2>$null | Out-Null
 git remote add origin $cleanUrl
 git branch --set-upstream-to=origin/main main 2>$null | Out-Null
@@ -144,14 +155,35 @@ if ($SkipRelease) {
 
 Step "完成"
 $short = $commit.Substring(0, 7)
+
+if ($EnablePages) {
+  Step "附带：开 GitHub Pages"
+  $pagesUrl = "https://$Owner.github.io/$Repo/market/index.json"
+  try {
+    Invoke-GitHub -Method POST -Uri "$api/repos/$repoFull/pages" -Body @{
+      source = @{ branch = "main"; path = "/" }
+    } | Out-Null
+    Ok "Pages 已开启（首次构建约 1 分钟）"
+  } catch {
+    $msg = $_.Exception.Message
+    if ($msg -match "409|already") { Ok "Pages 本来就在跑，跳过" }
+    else { Write-Host "   Pages 没开成（私有仓库或权限不足？）：$msg" -ForegroundColor Yellow }
+  }
+  Ok "索引地址：$pagesUrl"
+}
+
 $lines = @(
   "   仓库：https://github.com/$repoFull",
+  "   Release：https://github.com/$repoFull/releases",
   "   下一步（索引要钉到最后那个 commit）：",
   "     node scripts/make-index.mjs",
   "     git add market/index.json",
   "     git commit -m ""chore: point market index at $short""",
   "     git push",
   "   然后去 awesome-dsh-plugin 提 PR：把 submission/awesome-dsh-plugin/data/plugins/ 下的",
-  "   headacheee__dsh-genshin-autolaunch.yml 放进对方的 data/plugins/ 同名路径。"
+  "   headacheee__dsh-genshin-autolaunch.yml 放进对方的 data/plugins/ 同名路径。",
+  "   把索引加进 DSH：设置 → 插件 → 发现 → 索引源，填",
+  "     https://$Owner.github.io/$Repo/market/index.json",
+  "   （国内 raw.githubusercontent.com 被墙，所以别用 raw 地址）"
 )
 Write-Host -ForegroundColor Cyan ($lines -join [Environment]::NewLine)
