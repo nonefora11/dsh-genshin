@@ -23,7 +23,8 @@
     "README.zh.md",
     "CHANGELOG.md",
     "LICENSE",
-    "PUBLISH.md"
+    "PUBLISH.md",
+    ".gitattributes"
   ],
   "keywords": [
     "dsh",
