@@ -1,0 +1,10 @@
+node_modules/
+*.tgz
+.pnpm-store/
+npm-debug.log*
+.DS_Store
+Thumbs.db
+downloads/
+*.part
+*.exe
+state.json

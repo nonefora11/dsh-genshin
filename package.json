@@ -1,0 +1,69 @@
+{
+  "name": "dsh-genshin-autolaunch",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness 启动后自动打开《原神》官网并下载官方安装器的插件。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib/*": "./lib/*",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "genshin-autolaunch": "./lib/cli.js"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "README.zh.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "screenshots.json"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "genshin",
+    "genshin-impact",
+    "autolaunch",
+    "downloader",
+    "mihoyo"
+  ],
+  "homepage": "https://github.com/headacheee/dsh-genshin-autolaunch#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/headacheee/dsh-genshin-autolaunch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/headacheee/dsh-genshin-autolaunch/issues"
+  },
+  "author": "headacheee",
+  "license": "MIT",
+  "icon": "./icon.svg",
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "smoke": "node test/smoke.mjs",
+    "dry-run": "node lib/cli.js --dry-run",
+    "run": "node lib/cli.js"
+  }
+}
