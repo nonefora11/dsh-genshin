@@ -1,5 +1,5 @@
 {
-  "name": "dsh-genshin-autolaunch",
+  "name": "dsh-genshin",
   "version": "0.1.0",
   "description": "DeepSeek Harness 启动后自动打开《原神》官网并下载官方安装器的插件。",
   "type": "module",
@@ -12,7 +12,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "genshin-autolaunch": "./lib/cli.js"
+    "dsh-genshin": "./lib/cli.js"
   },
   "files": [
     "lib",
@@ -34,13 +34,13 @@
     "downloader",
     "mihoyo"
   ],
-  "homepage": "https://github.com/headacheee/dsh-genshin-autolaunch#readme",
+  "homepage": "https://github.com/headacheee/dsh-genshin#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/headacheee/dsh-genshin-autolaunch.git"
+    "url": "git+https://github.com/headacheee/dsh-genshin.git"
   },
   "bugs": {
-    "url": "https://github.com/headacheee/dsh-genshin-autolaunch/issues"
+    "url": "https://github.com/headacheee/dsh-genshin/issues"
   },
   "author": "headacheee",
   "license": "MIT",

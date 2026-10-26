@@ -1,4 +1,4 @@
-# dsh-genshin-autolaunch（原神自动启动）
+# dsh-genshin（原神自动启动）
 
 DeepSeek Harness 插件：**启动 DSH 之后，自动打开《原神》官网，并把官方安装器下载好。**
 
@@ -25,16 +25,16 @@ DeepSeek Harness 插件：**启动 DSH 之后，自动打开《原神》官网�
 
 ```bash
 # 在你的 DSH profile 目录里执行，例如 C:\Users\<你>\.dsh\profiles\desktop
-pnpm add file:./dsh-genshin-autolaunch-0.1.0.tgz    # Release 里的资产
-pnpm add "git+https://github.com/headacheee/dsh-genshin-autolaunch.git#<commit>"
+pnpm add file:./dsh-genshin-0.1.0.tgz    # Release 里的资产
+pnpm add "git+https://github.com/headacheee/dsh-genshin.git#<commit>"
 ```
 
 然后把包名加进 profile `package.json` 的 `dsh.profile.bundles`，或者直接依赖随包的 `cordis.patch.yml` 自动插入这一行：
 
 ```yaml
 - insert:
-    - id: genshin-autolaunch
-      name: 'dsh-genshin-autolaunch'
+    - id: dsh-genshin
+      name: 'dsh-genshin'
       config:
         enabled: true
         openSite: true
@@ -65,7 +65,7 @@ pnpm add "git+https://github.com/headacheee/dsh-genshin-autolaunch.git#<commit>"
 | `requestTimeoutMs` | `120000` | 单次请求超时。 |
 | `downloadTimeoutMs` | `21600000` | 整个下载流程超时（6 小时）。 |
 | `retries` | `3` | 失败重试次数，指数退避。 |
-| `stateDir` | `$DSH_HOME/genshin-autolaunch` | `state.json` 位置。 |
+| `stateDir` | `$DSH_HOME/dsh-genshin` | `state.json` 位置。 |
 
 ## 命令行（不重启 DSH 也能跑一次）
 

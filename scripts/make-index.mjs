@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
 
-const repoUrl = 'https://github.com/headacheee/dsh-genshin-autolaunch'
+const repoUrl = 'https://github.com/headacheee/dsh-genshin'
 const indexFile = path.join(root, 'market', 'index.json')
 const checkOnly = process.argv.includes('--check')
 const explicitCommit = process.argv.slice(2).find((arg) => /^[0-9a-f]{40}$/.test(arg))

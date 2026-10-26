@@ -55,7 +55,7 @@
   },
   "plugins": [
     {
-      "name": "dsh-genshin-autolaunch",
+      "name": "dsh-genshin",
       "title": {
         "en": "Genshin Auto Launch",
         "zh": "原神自动启动"
@@ -66,9 +66,9 @@
       },
       "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9ImdlbnNoaW4gYXV0b2xhdW5jaCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNGEzZjZiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzEyMTAxYyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmU5YTgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZDhiNDVhIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxNiIgZmlsbD0idXJsKCNnKSIvPgogIDxyZWN0IHg9IjIiIHk9IjIiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcng9IjE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmU5YTgiIHN0cm9rZS1vcGFjaXR5PSIuNTUiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwhLS0g5Zub6IqS5pif77ya5Y+W5ZCR5LiK55qE5LiL6L29566t5aS0IC0tPgogIDxwYXRoIGQ9Ik0zMiAxMSBMMzYgMjcgTDUyIDMyIEwzNiAzNyBMMzIgNTMgTDI4IDM3IEwxMiAzMiBMMjggMjcgWiIgZmlsbD0idXJsKCNhKSIgb3BhY2l0eT0iLjk1Ii8+CiAgPCEtLSDlkJHkuIvnrq3lpLQgLS0+CiAgPHBhdGggZD0iTTMyIDI0IHYxMyBNMjYuNSAzMiBMMzIgMzggTDM3LjUgMzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJhMjM0MCIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K",
       "author": "headacheee",
-      "homepage": "https://github.com/headacheee/dsh-genshin-autolaunch",
+      "homepage": "https://github.com/headacheee/dsh-genshin",
       "repository": {
-        "url": "https://github.com/headacheee/dsh-genshin-autolaunch"
+        "url": "https://github.com/headacheee/dsh-genshin"
       },
       "metadata": {
         "category": "fun",
@@ -85,17 +85,17 @@
           "zero-dependency"
         ],
         "sortKeys": {
-          "publish": 1793024938
+          "publish": 1793025281
         }
       },
       "versions": [
         {
           "version": "0.1.0",
-          "publishTimestamp": 1793024938,
+          "publishTimestamp": 1793025281,
           "source": {
             "type": "git",
-            "url": "https://github.com/headacheee/dsh-genshin-autolaunch",
-            "commit": "0ad31abc7fee7316b16d9d81d7d870cbdd7e5a5b"
+            "url": "https://github.com/headacheee/dsh-genshin",
+            "commit": "a07ed82cbbb13f6406be6b8edf3451e0cab7cb86"
           },
           "engines": {
             "dsh": ">=0.1.0"

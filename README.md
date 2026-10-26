@@ -1,4 +1,4 @@
-# dsh-genshin-autolaunch
+# dsh-genshin
 
 A DeepSeek Harness plugin: **when DSH starts, it opens the official Genshin Impact site and downloads the official launcher for you.**
 
@@ -25,16 +25,16 @@ Search for **Genshin Auto Launch** in *Settings → Plugins → Discover*, or ad
 
 ```bash
 # inside your DSH profile directory, e.g. C:\Users\<you>\.dsh\profiles\desktop
-pnpm add file:./dsh-genshin-autolaunch-0.1.0.tgz   # release asset
-pnpm add "git+https://github.com/headacheee/dsh-genshin-autolaunch.git#<commit>"
+pnpm add file:./dsh-genshin-0.1.0.tgz   # release asset
+pnpm add "git+https://github.com/headacheee/dsh-genshin.git#<commit>"
 ```
 
 Then add the bundle to `dsh.profile.bundles` in the profile `package.json`, or let the bundled `cordis.patch.yml` insert the row for you:
 
 ```yaml
 - insert:
-    - id: genshin-autolaunch
-      name: 'dsh-genshin-autolaunch'
+    - id: dsh-genshin
+      name: 'dsh-genshin'
       config:
         enabled: true
         openSite: true
@@ -63,7 +63,7 @@ Every key is optional; anything omitted falls back to the default below. Boolean
 | `requestTimeoutMs` | `120000` | Per-request timeout. |
 | `downloadTimeoutMs` | `21600000` | Overall download timeout (6 h). |
 | `retries` | `3` | Retry attempts with exponential backoff. |
-| `stateDir` | `$DSH_HOME/genshin-autolaunch` | Where `state.json` lives. |
+| `stateDir` | `$DSH_HOME/dsh-genshin` | Where `state.json` lives. |
 
 ## CLI (run it once, without restarting DSH)
 

@@ -1,11 +1,11 @@
-# dsh-genshin-autolaunch —— 随包 bundle patch
+# dsh-genshin —— 随包 bundle patch
 #
 # 这一行会被 dsh 的 profile loader 读取，把插件挂进宿主插件表。
 # config 里的每个值都对应 lib/index.js 的 resolveConfig() 认识的小写驼峰键，
 # 删掉某一项就回落到 DEFAULTS。
 - insert:
-    - id: genshin-autolaunch
-      name: 'dsh-genshin-autolaunch'
+    - id: dsh-genshin
+      name: 'dsh-genshin'
       config:
         enabled: true
         openSite: true

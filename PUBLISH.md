@@ -36,7 +36,7 @@ token 只在本机环境变量里待着，脚本不会写进 `.git/config`。
 
 ```powershell
 $env:GITHUB_TOKEN = "ghp_xxx"
-cd C:\Users\wwb26\Documents\deepseek-harness\default-workspace\dsh-genshin-autolaunch
+cd C:\Users\wwb26\Documents\deepseek-harness\default-workspace\dsh-genshin
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\publish-github.ps1 -EnablePages
 ```
 
@@ -45,15 +45,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\publish-github.ps1 -
 1. `GET /user` 校验 token，并把 `-Owner` 纠正成 token 真正的归属账号
 2. 仓库不存在就 `POST /user/repos` 建（描述、issues 开、wiki 关），存在就跳过
 3. `git push` 到 `main`，**临时 URL 里塞 token**，推完把 `origin` 改回不带 token 的干净地址；失败重试 3 次
-4. `npm pack` 出 `dsh-genshin-autolaunch-0.1.0.tgz`
+4. `npm pack` 出 `dsh-genshin-0.1.0.tgz`
 5. `POST /releases` 建 `v0.1.0`，再用 `upload_url` 把 tgz 传成 Release 资产
 6. `-EnablePages` 时 `POST /pages` 开 Pages（源 `main` 根目录）
 
 跑完你会拿到：
 
-- 仓库 `https://github.com/headacheee/dsh-genshin-autolaunch`
-- Release 资产 `https://github.com/headacheee/dsh-genshin-autolaunch/releases/download/v0.1.0/dsh-genshin-autolaunch-0.1.0.tgz`
-- 索引 `https://headacheee.github.io/dsh-genshin-autolaunch/market/index.json`
+- 仓库 `https://github.com/headacheee/dsh-genshin`
+- Release 资产 `https://github.com/headacheee/dsh-genshin/releases/download/v0.1.0/dsh-genshin-0.1.0.tgz`
+- 索引 `https://headacheee.github.io/dsh-genshin/market/index.json`
 
 ## 第 3 步：索引钉到最后那个 commit，再推一次
 
@@ -75,7 +75,7 @@ git push
 DSH → 设置 → 插件 → 发现 → **索引源** → 添加：
 
 ```
-https://headacheee.github.io/dsh-genshin-autolaunch/market/index.json
+https://headacheee.github.io/dsh-genshin/market/index.json
 ```
 
 加完刷新，「原神自动启动 / Genshin Auto Launch」就出现在列表里，点安装即可。**别用 raw 地址**（`raw.githubusercontent.com` 国内被墙），也别用 GitHub API 的 contents 地址（返回的是 JSON 包装层，不是索引本体）。
@@ -91,7 +91,7 @@ $env:GITHUB_TOKEN = "ghp_xxx"
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\open-market-pr.ps1
 ```
 
-脚本会 fork 上游 → 用 contents API 写入 `data/plugins/headacheee__dsh-genshin-autolaunch.yml` → 直接从 fork 开 PR，并打印 PR 链接。想先看要提交什么、不碰网络：
+脚本会 fork 上游 → 用 contents API 写入 `data/plugins/headacheee__dsh-genshin.yml` → 直接从 fork 开 PR，并打印 PR 链接。想先看要提交什么、不碰网络：
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\open-market-pr.ps1 -DryRun -Owner headacheee
@@ -100,13 +100,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\open-market-pr.ps1 -
 提交的文件内容（就是 `submission/awesome-dsh-plugin/data/plugins/` 里那份）：
 
 ```yaml
-url: https://github.com/headacheee/dsh-genshin-autolaunch
-name: headacheee/dsh-genshin-autolaunch
+url: https://github.com/headacheee/dsh-genshin
+name: headacheee/dsh-genshin
 category: fun
 description:
   en: Opens the official Genshin Impact site and downloads the official launcher when DeepSeek Harness starts.
   zh: DSH 启动后自动打开《原神》官网并下载官方安装器。
-tarball: https://github.com/headacheee/dsh-genshin-autolaunch/releases/download/v0.1.0/dsh-genshin-autolaunch-0.1.0.tgz
+tarball: https://github.com/headacheee/dsh-genshin/releases/download/v0.1.0/dsh-genshin-0.1.0.tgz
 ```
 
 CI 卡点（都已经对齐了）：`url` 与仓库完全一致、`description.en` 一句话以句号结尾、每条 PR ≤3 个条目、仓库 `package.json` 有 `dsh.bundle`、仓库存在 ≥1 天。**图标**想加的话必须是仓库内的 png/jpg/webp（不接受 SVG 和第三方图床），所以这份条目没写 `icon`。
@@ -117,11 +117,11 @@ CI 卡点（都已经对齐了）：`url` 与仓库完全一致、`description.e
 
 ```bash
 # 仓库在不在
-curl -s -o /dev/null -w "%{http_code}\n" https://api.github.com/repos/headacheee/dsh-genshin-autolaunch
+curl -s -o /dev/null -w "%{http_code}\n" https://api.github.com/repos/headacheee/dsh-genshin
 # Release 资产在不在（-L 跟随重定向）
-curl -sIL -o /dev/null -w "%{http_code}\n" https://github.com/headacheee/dsh-genshin-autolaunch/releases/download/v0.1.0/dsh-genshin-autolaunch-0.1.0.tgz
+curl -sIL -o /dev/null -w "%{http_code}\n" https://github.com/headacheee/dsh-genshin/releases/download/v0.1.0/dsh-genshin-0.1.0.tgz
 # 索引是不是合法 JSON 且钉了 commit
-curl -s https://headacheee.github.io/dsh-genshin-autolaunch/market/index.json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const i=JSON.parse(s);console.log(i.plugins[0].name, i.plugins[0].versions[0].source.commit)})"
+curl -s https://headacheee.github.io/dsh-genshin/market/index.json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const i=JSON.parse(s);console.log(i.plugins[0].name, i.plugins[0].versions[0].source.commit)})"
 ```
 
 ## 报错对照

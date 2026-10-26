@@ -1,4 +1,4 @@
-﻿# 把 dsh-genshin-autolaunch 推到你自己的 GitHub，并顺带发一个 Release
+﻿# 把 dsh-genshin 推到你自己的 GitHub，并顺带发一个 Release
 #
 # 用法（在仓库根目录执行）：
 #   $env:GITHUB_TOKEN = "ghp_xxx"      # 只需要 repo 权限的 classic PAT，或 fine-grained 的 Contents+Metadata 权限
@@ -7,7 +7,7 @@
 #
 #   可选参数：
 #     -Owner   GitHub 用户名（默认 headacheee）
-#     -Repo    仓库名（默认 dsh-genshin-autolaunch）
+#     -Repo    仓库名（默认 dsh-genshin）
 #     -Private 建成私有仓库
 #     -SkipRelease  只推代码，不建 Release
 #     -EnablePages  顺手开 GitHub Pages（市场索引就有个国内能访问的 https 地址）
@@ -22,7 +22,7 @@
 param(
   [string]$Token = $env:GITHUB_TOKEN,
   [string]$Owner = "headacheee",
-  [string]$Repo = "dsh-genshin-autolaunch",
+  [string]$Repo = "dsh-genshin",
   [switch]$Private,
   [switch]$SkipRelease,
   [switch]$EnablePages
@@ -47,7 +47,7 @@ function Invoke-GitHub {
     Authorization          = "token $Token"
     Accept                 = "application/vnd.github+json"
     "X-GitHub-Api-Version" = "2022-11-28"
-    "User-Agent"           = "dsh-genshin-autolaunch-publish"
+    "User-Agent"           = "dsh-genshin-publish"
   }
   foreach ($key in $Headers.Keys) { $base[$key] = $Headers[$key] }
   $params = @{ Method = $Method; Uri = $Uri; Headers = $base }
@@ -135,7 +135,7 @@ if ($SkipRelease) {
     $release = Invoke-GitHub -Method POST -Uri "$api/repos/$repoFull/releases" -Body @{
       tag_name         = $tag
       target_commitish = "main"
-      name             = "dsh-genshin-autolaunch $tag"
+      name             = "dsh-genshin $tag"
       body             = "启动 DeepSeek Harness 后自动打开《原神》官网并下载官方安装器。`n`n安装：在 DSH profile 目录执行 ``pnpm add $tgz 对应的 file: 路径``，或直接 ``pnpm add $repoFull``（市场收录后可用）。"
       draft            = $false
       prerelease       = $false
@@ -147,7 +147,7 @@ if ($SkipRelease) {
     -Headers @{
       Authorization          = "token $Token"
       "Content-Type"         = "application/gzip"
-      "User-Agent"           = "dsh-genshin-autolaunch-publish"
+      "User-Agent"           = "dsh-genshin-publish"
       "X-GitHub-Api-Version" = "2022-11-28"
     } -InFile $tgz -TimeoutSec 300 | Out-Null
   Ok "资产已上传：https://github.com/$repoFull/releases/download/$tag/$tgz"
@@ -181,7 +181,7 @@ $lines = @(
   "     git commit -m ""chore: point market index at $short""",
   "     git push",
   "   然后去 awesome-dsh-plugin 提 PR：把 submission/awesome-dsh-plugin/data/plugins/ 下的",
-  "   headacheee__dsh-genshin-autolaunch.yml 放进对方的 data/plugins/ 同名路径。",
+  "   headacheee__dsh-genshin.yml 放进对方的 data/plugins/ 同名路径。",
   "   把索引加进 DSH：设置 → 插件 → 发现 → 索引源，填",
   "     https://$Owner.github.io/$Repo/market/index.json",
   "   （国内 raw.githubusercontent.com 被墙，所以别用 raw 地址）"

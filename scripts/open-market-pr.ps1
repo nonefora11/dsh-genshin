@@ -24,7 +24,7 @@ $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
 
 $upstream = "awesome-dsh-plugin/awesome-dsh-plugin"
-$repoName = "dsh-genshin-autolaunch"
+$repoName = "dsh-genshin"
 $pkg = Get-Content package.json -Raw -Encoding UTF8 | ConvertFrom-Json
 $version = $pkg.version
 
@@ -37,7 +37,7 @@ function Invoke-GitHub {
     Authorization          = "token $Token"
     Accept                 = "application/vnd.github+json"
     "X-GitHub-Api-Version" = "2022-11-28"
-    "User-Agent"           = "dsh-genshin-autolaunch-submit"
+    "User-Agent"           = "dsh-genshin-submit"
   }
   $params = @{ Method = $Method; Uri = $Uri; Headers = $headers }
   if ($null -ne $Body) { $params.Body = ($Body | ConvertTo-Json -Depth 8); $params.ContentType = "application/json" }

@@ -11,26 +11,26 @@
 已准备好的文件：
 
 ```
-submission/awesome-dsh-plugin/data/plugins/headacheee__dsh-genshin-autolaunch.yml
+submission/awesome-dsh-plugin/data/plugins/headacheee__dsh-genshin.yml
 ```
 
 内容（category 选的是 `fun`；想更偏工具向就改 `tools`）：
 
 ```yaml
-url: https://github.com/headacheee/dsh-genshin-autolaunch
-name: headacheee/dsh-genshin-autolaunch
+url: https://github.com/headacheee/dsh-genshin
+name: headacheee/dsh-genshin
 category: fun
 description:
   en: Opens the official Genshin Impact site and downloads the official launcher when DeepSeek Harness starts.
   zh: DSH 启动后自动打开《原神》官网并下载官方安装器。
-tarball: https://github.com/headacheee/dsh-genshin-autolaunch/releases/download/v0.1.0/dsh-genshin-autolaunch-0.1.0.tgz
+tarball: https://github.com/headacheee/dsh-genshin/releases/download/v0.1.0/dsh-genshin-0.1.0.tgz
 ```
 
 ### 手工步骤
 
 1. Fork `awesome-dsh-plugin/awesome-dsh-plugin`。
-2. 把上面那个文件放到 fork 的 `data/plugins/headacheee__dsh-genshin-autolaunch.yml`。
-3. 开 PR，标题建议：`feat: add dsh-genshin-autolaunch (fun)`。
+2. 把上面那个文件放到 fork 的 `data/plugins/headacheee__dsh-genshin.yml`。
+3. 开 PR，标题建议：`feat: add dsh-genshin (fun)`。
 4. 等 CI：条目格式 → 仓库根 `package.json` 里的 `dsh.bundle`（本仓库有 `dsh.bundle.patch`）→ 仓库存在 ≥1 天 → 站点构建。
 5. 合并后 `dshmarket` 会按 `https://awesome-dsh-plugin.com/plugins.json` 自动收录，一般 1 天内能在市场里搜到。
 
@@ -62,8 +62,8 @@ DSH 自带的市场读的是 format-1 索引 JSON，用户可以自己添加索�
 添加方式，二选一：
 
 1. **加索引源**：把索引地址填进索引源列表
-   - `https://raw.githubusercontent.com/headacheee/dsh-genshin-autolaunch/main/market/index.json`
-   - 国内 raw 被墙时用 API 形式：`https://api.github.com/repos/headacheee/dsh-genshin-autolaunch/contents/market/index.json`（需要 `Accept: application/vnd.github.raw`，市场里能不能直接用取决于版本）
+   - `https://raw.githubusercontent.com/headacheee/dsh-genshin/main/market/index.json`
+   - 国内 raw 被墙时用 API 形式：`https://api.github.com/repos/headacheee/dsh-genshin/contents/market/index.json`（需要 `Accept: application/vnd.github.raw`，市场里能不能直接用取决于版本）
 2. **不走市场**：直接装 tarball（见 README 的安装段落），或把仓库名加进 profile 的 `dsh.profile.bundles`。
 
 索引里的 `versions[0].source.commit` 钉死 40 位 commit，所以每次发版后要重跑一次：

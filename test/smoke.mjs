@@ -47,7 +47,7 @@ function check(label, fn) {
 
 // ---- 起始断言 ----
 await check('插件名与导出', () => {
-  assert.equal(name, 'genshin-autolaunch')
+  assert.equal(name, 'dsh-genshin')
   assert.equal(typeof apply, 'function')
 })
 
@@ -141,7 +141,7 @@ const server = createServer((req, res) => {
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
 const base = `http://127.0.0.1:${server.address().port}`
 
-const sandbox = await mkdtemp(path.join(tmpdir(), 'genshin-autolaunch-'))
+const sandbox = await mkdtemp(path.join(tmpdir(), 'dsh-genshin-'))
 const config = resolveConfig({
   downloadDir: path.join(sandbox, 'downloads'),
   stateDir: path.join(sandbox, 'state'),
