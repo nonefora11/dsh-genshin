@@ -93,8 +93,17 @@ if ($exists) {
     has_issues  = $true
     has_wiki    = $false
   }
-  Invoke-GitHub -Method POST -Uri "$api/user/repos" -Body $payload | Out-Null
-  Ok "已创建 https://github.com/$repoFull"
+  try {
+    Invoke-GitHub -Method POST -Uri "$api/user/repos" -Body $payload | Out-Null
+    Ok "已创建 https://github.com/$repoFull"
+  } catch {
+    $msg = $_.Exception.Message
+    Write-Host "   建仓库失败：$msg" -ForegroundColor Yellow
+    Write-Host "   fine-grained token 少 Administration:write（或 classic token 少 repo）时会走到这里。两条出路：" -ForegroundColor Yellow
+    Write-Host "   ① 换成勾了 repo 的 classic token，重跑本脚本；" -ForegroundColor Yellow
+    Write-Host "   ② 浏览器打开 https://github.com/new?name=$Repo 建一个空仓库（README / .gitignore / license 一个都别勾），再原样重跑本脚本。" -ForegroundColor Yellow
+    throw "仓库还没建起来，先按上面 ① 或 ② 处理"
+  }
 }
 
 Step "3/5 推送 main"
