@@ -35,15 +35,15 @@
     "downloader",
     "mihoyo"
   ],
-  "homepage": "https://github.com/headacheee/dsh-genshin#readme",
+  "homepage": "https://github.com/nonefora11/dsh-genshin#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/headacheee/dsh-genshin.git"
+    "url": "git+https://github.com/nonefora11/dsh-genshin.git"
   },
   "bugs": {
-    "url": "https://github.com/headacheee/dsh-genshin/issues"
+    "url": "https://github.com/nonefora11/dsh-genshin/issues"
   },
-  "author": "headacheee",
+  "author": "nonefora11",
   "license": "MIT",
   "icon": "./icon.svg",
   "engines": {

@@ -26,7 +26,7 @@ Search for **Genshin Auto Launch** in *Settings → Plugins → Discover*, or ad
 ```bash
 # inside your DSH profile directory, e.g. C:\Users\<you>\.dsh\profiles\desktop
 pnpm add file:./dsh-genshin-0.1.0.tgz   # release asset
-pnpm add "git+https://github.com/headacheee/dsh-genshin.git#<commit>"
+pnpm add "git+https://github.com/nonefora11/dsh-genshin.git#<commit>"
 ```
 
 Then add the bundle to `dsh.profile.bundles` in the profile `package.json`, or let the bundled `cordis.patch.yml` insert the row for you:
@@ -92,4 +92,4 @@ Eleven offline cases: config normalisation, filename resolution, 302 following, 
 
 ## License
 
-MIT © headacheee
+MIT © nonefora11

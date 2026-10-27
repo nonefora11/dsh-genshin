@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
 
-const repoUrl = 'https://github.com/headacheee/dsh-genshin'
+const repoUrl = 'https://github.com/nonefora11/dsh-genshin'
 const indexFile = path.join(root, 'market', 'index.json')
 const checkOnly = process.argv.includes('--check')
 const explicitCommit = process.argv.slice(2).find((arg) => /^[0-9a-f]{40}$/.test(arg))
@@ -60,8 +60,8 @@ const index = {
   format: 1,
   title: { en: 'Genshin Auto Launch', zh: '原神自动启动' },
   description: {
-    en: 'A curated index of DeepSeek Harness plugins by headacheee.',
-    zh: 'headacheee 维护的 DeepSeek Harness 插件索引。',
+    en: 'A curated index of DeepSeek Harness plugins by nonefora11.',
+    zh: 'nonefora11 维护的 DeepSeek Harness 插件索引。',
   },
   metadata: {
     categories: {
@@ -86,7 +86,7 @@ const index = {
         zh: 'DSH 启动后自动打开《原神》官网并下载官方安装器。',
       },
       icon: await iconDataUrl(),
-      author: pkg.author ?? 'headacheee',
+      author: pkg.author ?? 'nonefora11',
       homepage: repoUrl,
       repository: { url: repoUrl },
       metadata: {

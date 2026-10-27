@@ -26,7 +26,7 @@ DeepSeek Harness 插件：**启动 DSH 之后，自动打开《原神》官网�
 ```bash
 # 在你的 DSH profile 目录里执行，例如 C:\Users\<你>\.dsh\profiles\desktop
 pnpm add file:./dsh-genshin-0.1.0.tgz    # Release 里的资产
-pnpm add "git+https://github.com/headacheee/dsh-genshin.git#<commit>"
+pnpm add "git+https://github.com/nonefora11/dsh-genshin.git#<commit>"
 ```
 
 然后把包名加进 profile `package.json` 的 `dsh.profile.bundles`，或者直接依赖随包的 `cordis.patch.yml` 自动插入这一行：
@@ -94,4 +94,4 @@ node test/smoke.mjs
 
 ## 许可证
 
-MIT © headacheee
+MIT © nonefora11

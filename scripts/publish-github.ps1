@@ -6,7 +6,7 @@
 #   （装了 PowerShell 7 也可以：pwsh -File scripts/publish-github.ps1）
 #
 #   可选参数：
-#     -Owner   GitHub 用户名（默认 headacheee）
+#     -Owner   GitHub 用户名（默认 nonefora11）
 #     -Repo    仓库名（默认 dsh-genshin）
 #     -Private 建成私有仓库
 #     -SkipRelease  只推代码，不建 Release
@@ -21,7 +21,7 @@
 [CmdletBinding()]
 param(
   [string]$Token = $env:GITHUB_TOKEN,
-  [string]$Owner = "headacheee",
+  [string]$Owner = "nonefora11",
   [string]$Repo = "dsh-genshin",
   [switch]$Private,
   [switch]$SkipRelease,
@@ -120,9 +120,12 @@ for ($attempt = 1; $attempt -le 3; $attempt++) {
   Start-Sleep -Seconds 5
 }
 if (-not $pushed) { throw "三次 push 都失败：先解决 github.com 连通性，再重跑本脚本（API 侧都已就绪）" }
-git remote remove origin 2>$null | Out-Null
+$prevEap = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+if ((git remote) -contains 'origin') { git remote remove origin | Out-Null }
 git remote add origin $cleanUrl
-git branch --set-upstream-to=origin/main main 2>$null | Out-Null
+git branch --set-upstream-to=origin/main main | Out-Null
+$ErrorActionPreference = $prevEap
 Ok "已推送：$cleanUrl（origin 已改回不带 token 的地址）"
 
 if ($SkipRelease) {
@@ -190,7 +193,7 @@ $lines = @(
   "     git commit -m ""chore: point market index at $short""",
   "     git push",
   "   然后去 awesome-dsh-plugin 提 PR：把 submission/awesome-dsh-plugin/data/plugins/ 下的",
-  "   headacheee__dsh-genshin.yml 放进对方的 data/plugins/ 同名路径。",
+  "   nonefora11__dsh-genshin.yml 放进对方的 data/plugins/ 同名路径。",
   "   把索引加进 DSH：设置 → 插件 → 发现 → 索引源，填",
   "     https://$Owner.github.io/$Repo/market/index.json",
   "   （国内 raw.githubusercontent.com 被墙，所以别用 raw 地址）"

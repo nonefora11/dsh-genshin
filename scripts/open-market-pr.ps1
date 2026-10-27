@@ -1,4 +1,4 @@
-# 向 awesome-dsh-plugin 提 PR 收录本插件（fork → 写文件 → 开 PR，一条龙）
+﻿# 向 awesome-dsh-plugin 提 PR 收录本插件（fork → 写文件 → 开 PR，一条龙）
 #
 #   $env:GITHUB_TOKEN = "ghp_xxx"
 #   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\open-market-pr.ps1
@@ -51,7 +51,7 @@ Step "0/4 准备条目"
 if ([string]::IsNullOrWhiteSpace($Owner) -and -not $DryRun) {
   $Owner = (Invoke-GitHub -Method GET -Uri "$api/user").login
 }
-if ([string]::IsNullOrWhiteSpace($Owner)) { $Owner = "headacheee" }
+if ([string]::IsNullOrWhiteSpace($Owner)) { $Owner = "nonefora11" }
 
 $entry = @"
 url: https://github.com/$Owner/$repoName
