@@ -85,17 +85,17 @@
           "zero-dependency"
         ],
         "sortKeys": {
-          "publish": 1793113953
+          "publish": 1793114928
         }
       },
       "versions": [
         {
           "version": "0.1.0",
-          "publishTimestamp": 1793113953,
+          "publishTimestamp": 1793114928,
           "source": {
             "type": "git",
             "url": "https://github.com/nonefora11/dsh-genshin",
-            "commit": "76e344f66add8574a4e3bc7add6585b6e07ad975"
+            "commit": "9587fb23d2ef55016d98055f5260e813478a421b"
           },
           "engines": {
             "dsh": ">=0.1.0"
