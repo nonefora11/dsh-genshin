@@ -1,3 +1,11 @@
+<!-- lang-switch:start -->
+<p align="center">
+  <b>English</b>
+  &nbsp;·&nbsp;
+  <a href="README.zh.md">简体中文</a>
+</p>
+<!-- lang-switch:end -->
+
 # dsh-genshin
 
 A DeepSeek Harness plugin: **when DSH starts, it opens the official Genshin Impact site and downloads the official launcher for you.**
@@ -93,3 +101,17 @@ Eleven offline cases: config normalisation, filename resolution, 302 following, 
 ## License
 
 MIT © nonefora11
+
+---
+
+---
+
+<!-- lang-switch:start -->
+---
+
+<p align="center">
+  <b>English</b>
+  &nbsp;·&nbsp;
+  <a href="README.zh.md">简体中文</a>
+</p>
+<!-- lang-switch:end -->

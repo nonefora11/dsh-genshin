@@ -1,3 +1,11 @@
+<!-- lang-switch:start -->
+<p align="center">
+  <a href="README.md">English</a>
+  &nbsp;·&nbsp;
+  <b>简体中文</b>
+</p>
+<!-- lang-switch:end -->
+
 # dsh-genshin（原神自动启动）
 
 DeepSeek Harness 插件：**启动 DSH 之后，自动打开《原神》官网，并把官方安装器下载好。**
@@ -95,3 +103,17 @@ node test/smoke.mjs
 ## 许可证
 
 MIT © nonefora11
+
+---
+
+---
+
+<!-- lang-switch:start -->
+---
+
+<p align="center">
+  <a href="README.md">English</a>
+  &nbsp;·&nbsp;
+  <b>简体中文</b>
+</p>
+<!-- lang-switch:end -->
